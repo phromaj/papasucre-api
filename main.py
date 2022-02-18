@@ -44,7 +44,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = pymongo.MongoClient(os.getenv(MONGODB_URI))
+client = pymongo.MongoClient(os.getenv('MONGODB_URI'))
 db = client.papa_sucre
 
 
