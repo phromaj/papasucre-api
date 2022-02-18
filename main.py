@@ -92,6 +92,19 @@ def create_user(user: userModel.User):
     return JSONResponse(status_code=status.HTTP_201_CREATED, content=jsonable_encoder(user))
 
 
+@app.get('/users/sex/{sex}', response_description="List all users", response_model=List[userModel.User])
+def list_users_by_sex(sex: str):
+    users = []
+    if sex == "female":
+        for user in db.users.find({"sex": "male"}):
+            users.append(user)
+        return users
+    else :
+        for user in db.users.find({"sex": "female"}):
+            users.append(user)
+        return users
+
+
 @app.post('/user-login')
 def login(auth: AuthDetails):
     user = None
