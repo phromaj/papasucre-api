@@ -7,6 +7,7 @@ import ssl
 from typing import List
 
 import pymongo
+import os
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.encoders import jsonable_encoder
@@ -43,8 +44,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = pymongo.MongoClient(
-    "mongodb+srv://rob:rob123456@cluster0.hv6ea.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+client = pymongo.MongoClient(os.getenv(MONGODB_URI))
 db = client.papa_sucre
 
 
